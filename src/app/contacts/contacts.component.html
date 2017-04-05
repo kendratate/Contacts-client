@@ -1,0 +1,8 @@
+
+<ul *ngFor="let item of contacts; let even = even, let odd = odd; let i = index"
+  [ngClass]="{ odd: odd, even: even }">
+  <li>{{item.firstname}} + " " + {{lastname}} + "  Phone: " + {{item.phone}}</li>
+</ul>
+
+
+
