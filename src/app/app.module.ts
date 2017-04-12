@@ -5,12 +5,15 @@ import { HttpModule, JsonpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { ContactsComponent } from './contacts/contacts.component';
-//import { ContactService } from "../contact.service";
+import { CreateComponent } from './create/create.component';
+import {ContactService} from "../contact.service";
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    ContactsComponent
+    ContactsComponent,
+    CreateComponent
   ],
   imports: [
     BrowserModule,
@@ -18,7 +21,7 @@ import { ContactsComponent } from './contacts/contacts.component';
     HttpModule,
     JsonpModule
   ],
-  providers: [AppComponent],
+  providers: [ContactService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

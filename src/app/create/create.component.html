@@ -1,3 +1,6 @@
-<p>
-  create works!
-</p>
+<label>New First Name: <input #newFirstName type="text" /></label>
+<label>New Last Name: <input #newLastName type="text" /></label>
+<label>New Phone #: <input #newPhoneNum type="text" /></label>
+<button (click)="createContact(newFirstName.value, newLastName.value, newPhoneNum.value); newFirstName.value=''; newLastName.value=''; newPhoneNum='';">Add Name</button>
+
+

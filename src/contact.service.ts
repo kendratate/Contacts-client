@@ -1,5 +1,5 @@
 import { Injectable }              from '@angular/core';
-import { Http, Response }          from '@angular/http';
+import { Headers, Http, Response } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 // import { Observable } from 'rxjs/Observable';
@@ -13,24 +13,9 @@ import { contact } from './app/Contact';
 
 export class ContactService {
   private contactsUrl = 'http://localhost:3000/';  // URL to web API
+  private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor (private http: Http) {}
-
-  // getContacts(){
-  //   return new Promise(resolve => {
-  //     // We're using Angular HTTP provider to request the data,
-  //     // then on the response, it'll map the JSON data to a parsed JS object.
-  //     // Next, we process the data and resolve the promise with the new data.
-  //     this.http.get('http://localhost:3000/')
-  //       .map(res => res.json())
-  //       .subscribe(data => {
-  //         // we've got back the raw data, now generate the core schedule data
-  //         // and save the data for later reference
-  //         this.contact = data;
-  //         resolve(this.contact);
-  //       });
-  //   });
-  // }
 
   getContacts(): Promise<contact[]> {
     return this.http.get(this.contactsUrl)
@@ -40,9 +25,33 @@ export class ContactService {
   }
 
   private extractData(res: Response) {
+    console.log(Response);
     let body = res.json();
-    return body.data || { };
+    return body.contacts || { };
   }
+
+  sortAsc(): Promise<contact[]> {
+    return this.http.get(this.contactsUrl + "sorta")
+      .toPromise()
+      .then(this.extractData)
+      .catch(this.handleError);
+  }
+
+  sortDesc(): Promise<contact[]> {
+    return this.http.get(this.contactsUrl + "sortd")
+      .toPromise()
+      .then(this.extractData)
+      .catch(this.handleError);
+  }
+
+  create(indexVal: number, firstName: string, lastName: string, phoneNum:string): Promise<contact[]>{
+    return this.http.post(this.contactsUrl, JSON.stringify({id:indexVal, firstName: firstName, lastName: lastName, phone: phoneNum }), {headers: this.headers})
+      .toPromise()
+      .then(this.extractData)
+      .catch(this.handleError);
+  }
+
+
 
   private handleError (error: Response | any) {
     // In a real world app, you might use a remote logging infrastructure
@@ -55,7 +64,6 @@ export class ContactService {
       errMsg = error.message ? error.message : error.toString();
     }
     console.error(errMsg);
-    // return Observable.throw(errMsg);
     return Promise.reject(errMsg);
   }
 }

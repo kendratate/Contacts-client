@@ -1,7 +1,8 @@
-#odd {
-  background-color: grey;
+.odd {
+  background-color: lightgrey;
+  line-height: 40px;
 }
 
-#even {
-  background-color: aqua;
+.even {
+  background-color: white;
 }

@@ -17,18 +17,34 @@ export class ContactsComponent implements OnInit {
   contacts: contact[];
   mode = 'observable';
 
+
   constructor(private contactService: ContactService) { }
   ngOnInit() {
+    this.getContacts();
+    console.log(this.contacts);
   }
 
   getContacts() {
     this.contactService.getContacts()
-      // .subscribe(
       .then(
           contacts => this.contacts = contacts,
           error => this.errorMessage = <any>error);
   }
 
+  sortAscending() {
+    this.contactService.sortAsc()
+      .then(
+          contacts => this.contacts = contacts,
+        error => this.errorMessage = <any>error);
+  }
+
+  sortDescending() {
+    this.contactService.sortDesc()
+      .then(
+        contacts => this.contacts = contacts,
+        error => this.errorMessage = <any>error);
+  }
 
 }
+
 

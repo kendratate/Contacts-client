@@ -1,8 +1,11 @@
-
+<div class="list">
+  <span><button onclick="">&#9650;</button> <button>&#9660;</button></span>
 <ul *ngFor="let item of contacts; let even = even, let odd = odd; let i = index"
   [ngClass]="{ odd: odd, even: even }">
-  <li>{{item.firstname}} + " " + {{lastname}} + "  Phone: " + {{item.phone}}</li>
+
+  <li>{{item.firstname}} {{item.lastname}}  : {{item.phone}}</li>
 </ul>
+</div>
 
 
 
