@@ -44,8 +44,8 @@ export class ContactService {
       .catch(this.handleError);
   }
 
-  create(indexVal: number, firstName: string, lastName: string, phoneNum:string): Promise<contact[]>{
-    return this.http.post(this.contactsUrl, JSON.stringify({id:indexVal, firstName: firstName, lastName: lastName, phone: phoneNum }), {headers: this.headers})
+  create(indexVal: string, firstName: string, lastName: string, phoneNum:string): Promise<contact[]>{
+    return this.http.post(this.contactsUrl, JSON.stringify({id:indexVal, firstname: firstName, lastname: lastName, phone: phoneNum }), {headers: this.headers})
       .toPromise()
       .then(this.extractData)
       .catch(this.handleError);

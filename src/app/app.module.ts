@@ -6,7 +6,7 @@ import { HttpModule, JsonpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { CreateComponent } from './create/create.component';
-import {ContactService} from "../contact.service";
+import { ContactService } from "../contact.service";
 
 
 @NgModule({

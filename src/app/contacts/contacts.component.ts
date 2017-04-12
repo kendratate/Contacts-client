@@ -15,8 +15,6 @@ import { contact } from '../Contact';
 export class ContactsComponent implements OnInit {
   errorMessage: string;
   contacts: contact[];
-  mode = 'observable';
-
 
   constructor(private contactService: ContactService) { }
   ngOnInit() {

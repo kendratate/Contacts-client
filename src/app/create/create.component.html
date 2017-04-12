@@ -1,6 +1,7 @@
-<label>New First Name: <input #newFirstName type="text" /></label>
-<label>New Last Name: <input #newLastName type="text" /></label>
-<label>New Phone #: <input #newPhoneNum type="text" /></label>
-<button (click)="createContact(newFirstName.value, newLastName.value, newPhoneNum.value); newFirstName.value=''; newLastName.value=''; newPhoneNum='';">Add Name</button>
-
+<div class="formBox">
+<label class="formLabel">First Name: <input #newFirstName type="text" /></label>
+<label class="formLabel">Last Name: <input #newLastName type="text" /></label>
+<label class="formLabel">Phone #: <input #newPhoneNum type="text" /></label>
+<button class="formButton" (click)="createContact(newFirstName.value, newLastName.value, newPhoneNum.value); newFirstName.value=''; newLastName.value=''; newPhoneNum.value='';">Add Contact</button>
+</div>
 
