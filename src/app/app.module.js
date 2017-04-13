@@ -12,7 +12,7 @@ var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
 var app_component_1 = require("./app.component");
 var contacts_component_1 = require("./contacts/contacts.component");
-//import { ContactService } from "../contact.service";
+var contact_service_1 = require("../contact.service");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -30,7 +30,7 @@ AppModule = __decorate([
             http_1.HttpModule,
             http_1.JsonpModule
         ],
-        providers: [app_component_1.AppComponent],
+        providers: [contact_service_1.ContactService],
         bootstrap: [app_component_1.AppComponent]
     })
 ], AppModule);

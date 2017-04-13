@@ -8,22 +8,48 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
-var Observable_1 = require("rxjs/Observable");
-require("rxjs/add/operator/catch");
-require("rxjs/add/operator/map");
+require("rxjs/add/operator/toPromise");
 var ContactService = (function () {
     function ContactService(http) {
         this.http = http;
-        this.contactsUrl = 'http://localhost:3000'; // URL to web API
+        this.contactsUrl = 'http://localhost:3000/'; // URL to web API
+        this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
     }
     ContactService.prototype.getContacts = function () {
         return this.http.get(this.contactsUrl)
-            .map(this.extractData)
+            .toPromise()
+            .then(this.extractData)
             .catch(this.handleError);
     };
     ContactService.prototype.extractData = function (res) {
         var body = res.json();
-        return body.data || {};
+        return body.contacts || {};
+    };
+    ContactService.prototype.sortAsc = function () {
+        return this.http.get(this.contactsUrl + "sorta")
+            .toPromise()
+            .then(this.extractData)
+            .catch(this.handleError);
+    };
+    ContactService.prototype.sortDesc = function () {
+        return this.http.get(this.contactsUrl + "sortd")
+            .toPromise()
+            .then(this.extractData)
+            .catch(this.handleError);
+    };
+    ContactService.prototype.create = function (indexVal, firstName, lastName, phoneNum) {
+        return this.http.post(this.contactsUrl, JSON.stringify({ id: indexVal, firstname: firstName, lastname: lastName, phone: phoneNum }), { headers: this.headers })
+            .toPromise()
+            .then(this.extractData)
+            .catch(this.handleError);
+    };
+    ContactService.prototype.deleteContact = function (indexVal) {
+        return this.http.delete(this.contactsUrl + "indexVal")
+            .toPromise()
+            .then(this.extractData)
+            .catch(this.handleError);
+    };
+    ContactService.prototype.editContact = function (indexVal) {
     };
     ContactService.prototype.handleError = function (error) {
         // In a real world app, you might use a remote logging infrastructure
@@ -37,7 +63,7 @@ var ContactService = (function () {
             errMsg = error.message ? error.message : error.toString();
         }
         console.error(errMsg);
-        return Observable_1.Observable.throw(errMsg);
+        return Promise.reject(errMsg);
     };
     return ContactService;
 }());

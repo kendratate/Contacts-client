@@ -1,13 +1,17 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="list">
   <span><button (click)="sortAscending();">&#9650;</button> <button (click)="sortDescending();">&#9660;</button></span>
 <ul *ngFor="let item of contacts; let even = even, let odd = odd; let i = index"
   [ngClass]="{ odd: odd, even: even }">
 
-  <li>{{item.firstname}} {{item.lastname}}  : {{item.phone}}</li>
+  <li>{{item.firstname}} {{item.lastname}}  : {{item.phone}}
+    <button class="deletebutton" (click)="deleteContact()"><i class="fa fa-trash"></i></button>
+    <button class="editbutton" (click)="editContact()"><i class="fa fa-edit"></i></button>
+  </li>
 </ul>
 </div>
 
-<div class="formBox" (ngSubmit)="onSubmit()">
+<div class="formBox">
   <label class="formLabel">First Name: <input #newFirstName type="text" /></label>
   <label class="formLabel">Last Name: <input #newLastName type="text" /></label>
   <label class="formLabel">Phone #: <input #newPhoneNum type="text" /></label>

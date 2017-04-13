@@ -1,8 +1,0 @@
-<div class="formBox" (ngSubmit)="onSubmit()">
-<label class="formLabel">First Name: <input #newFirstName type="text" /></label>
-<label class="formLabel">Last Name: <input #newLastName type="text" /></label>
-<label class="formLabel">Phone #: <input #newPhoneNum type="text" /></label>
-<button class="formButton" type="submit" (click)="createContact(newFirstName.value, newLastName.value, newPhoneNum.value); newFirstName.value=''; newLastName.value=''; newPhoneNum.value='';">Add Contact</button>
-</div>
-
-

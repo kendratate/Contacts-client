@@ -1,7 +1,6 @@
 import {Component, OnInit, Input} from '@angular/core';
 import { ContactService } from "../../contact.service";
 import { contact } from '../Contact';
-import { SharedService } from '../../shared.service';
 
 @Component({
   selector: 'app-contacts',
@@ -11,17 +10,12 @@ import { SharedService } from '../../shared.service';
 })
 
 
-
 export class ContactsComponent implements OnInit {
   errorMessage: string;
   contacts: contact[];
 
-  constructor(private contactService: ContactService, private _sharedService: SharedService) {
-    // this._sharedService.contacts$.subscribe(
-    //   data => {
-    //     this.contacts = data;
-    //   }
-    // )
+  constructor(private contactService: ContactService) {
+
   }
 
   ngOnInit() {
@@ -50,29 +44,6 @@ export class ContactsComponent implements OnInit {
         error => this.errorMessage = <any>error);
   }
 
-  // getContacts() {
-  //   this.contactService.getContacts()
-  //     .subscribe(
-  //       contacts => this.contacts = contacts,
-  //       error => this.errorMessage = <any>error);
-  // }
-  // sortAscending() {
-  //   this.contactService.sortAsc()
-  //     .subscribe(
-  //       contacts => this.contacts = contacts,
-  //       error => this.errorMessage = <any>error);
-  // }
-  //
-  // sortDescending() {
-  //   this.contactService.sortDesc()
-  //     .subscribe(
-  //       contacts => this.contacts = contacts,
-  //       error => this.errorMessage = <any>error);
-  // }
-
-//}
-
-
   indexCount = 99;
 
   createContact(firstName: string, lastName: string, phoneNum: string) {
@@ -85,8 +56,17 @@ export class ContactsComponent implements OnInit {
       .then(
         contacts => this.contacts = contacts,
         error => this.errorMessage = <any>error);
-    this._sharedService.publishData(this.contacts);
+  }
 
+  editContact(index:string){
+
+  }
+
+  deleteContact(index: string){
+    this.contactService.deleteContact(index)
+      .then(
+        contacts => this.contacts = contacts,
+        error => this.errorMessage = <any>error);
   }
 
 }

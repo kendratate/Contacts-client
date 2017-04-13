@@ -5,16 +5,12 @@ import { HttpModule, JsonpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { ContactsComponent } from './contacts/contacts.component';
-import { CreateComponent } from './create/create.component';
 import { ContactService } from "../contact.service";
-import { SharedService } from "../shared.service";
-
 
 @NgModule({
   declarations: [
     AppComponent,
-    ContactsComponent,
-    CreateComponent
+    ContactsComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +18,7 @@ import { SharedService } from "../shared.service";
     HttpModule,
     JsonpModule
   ],
-  providers: [ContactService, SharedService],
+  providers: [ContactService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

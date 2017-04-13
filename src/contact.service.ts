@@ -23,11 +23,6 @@ export class ContactService {
       .catch(this.handleError);
   }
 
-  // getContacts(): Observable<contact[]> {
-  //   return this.http.get(this.contactsUrl)
-  //     .map(this.extractData)
-  //     .catch(this.handleError);
-  // }
 
   private extractData(res: Response) {
     let body = res.json();
@@ -48,23 +43,23 @@ export class ContactService {
       .catch(this.handleError);
   }
 
-  // sortAsc(): Observable<contact[]> {
-  //   return this.http.get(this.contactsUrl + "sorta")
-  //     .map(this.extractData)
-  //     .catch(this.handleError);
-  // }
-  //
-  // sortDesc(): Observable<contact[]> {
-  //   return this.http.get(this.contactsUrl + "sortd")
-  //     .map(this.extractData)
-  //     .catch(this.handleError);
-  // }
 
   create(indexVal: string, firstName: string, lastName: string, phoneNum:string): Promise<contact[]>{
     return this.http.post(this.contactsUrl, JSON.stringify({id:indexVal, firstname: firstName, lastname: lastName, phone: phoneNum }), {headers: this.headers})
       .toPromise()
       .then(this.extractData)
       .catch(this.handleError);
+  }
+
+  deleteContact(indexVal: string){
+    return this.http.delete(this.contactsUrl + "indexVal")
+      .toPromise()
+      .then(this.extractData)
+      .catch(this.handleError);
+  }
+
+  editContact(indexVal: string){
+
   }
 
 

@@ -11,14 +11,42 @@ var contact_service_1 = require("../../contact.service");
 var ContactsComponent = (function () {
     function ContactsComponent(contactService) {
         this.contactService = contactService;
-        this.mode = 'observable';
+        this.indexCount = 99;
     }
     ContactsComponent.prototype.ngOnInit = function () {
+        this.getContacts();
     };
     ContactsComponent.prototype.getContacts = function () {
         var _this = this;
         this.contactService.getContacts()
-            .subscribe(function (contacts) { return _this.contacts = contacts; }, function (error) { return _this.errorMessage = error; });
+            .then(function (contacts) { return _this.contacts = contacts; }, function (error) { return _this.errorMessage = error; });
+    };
+    ContactsComponent.prototype.sortAscending = function () {
+        var _this = this;
+        this.contactService.sortAsc()
+            .then(function (contacts) { return _this.contacts = contacts; }, function (error) { return _this.errorMessage = error; });
+    };
+    ContactsComponent.prototype.sortDescending = function () {
+        var _this = this;
+        this.contactService.sortDesc()
+            .then(function (contacts) { return _this.contacts = contacts; }, function (error) { return _this.errorMessage = error; });
+    };
+    ContactsComponent.prototype.createContact = function (firstName, lastName, phoneNum) {
+        var _this = this;
+        //take out index when connected to a database
+        if (!firstName) {
+            return;
+        }
+        this.indexCount++;
+        this.contactService.create(String(this.indexCount), firstName, lastName, phoneNum)
+            .then(function (contacts) { return _this.contacts = contacts; }, function (error) { return _this.errorMessage = error; });
+    };
+    ContactsComponent.prototype.editContact = function (index) {
+    };
+    ContactsComponent.prototype.deleteContact = function (index) {
+        var _this = this;
+        this.contactService.deleteContact(index)
+            .then(function (contacts) { return _this.contacts = contacts; }, function (error) { return _this.errorMessage = error; });
     };
     return ContactsComponent;
 }());

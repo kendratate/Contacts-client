@@ -6,3 +6,25 @@
 .even {
   background-color: white;
 }
+
+.formBox{
+  width: 320px;
+  padding: 10px;
+  border: 5px solid gray;
+  margin: 0;
+  position: absolute;
+}
+
+.formButton{
+  float: right;
+  border: 5px solid gray;
+  background-color: gray;
+  margin: 2px;
+  cursor: pointer;
+  text-align: center;
+
+}
+
+.formLabel{
+  float: left;
+}
