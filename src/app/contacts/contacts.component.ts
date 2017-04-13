@@ -63,7 +63,9 @@ export class ContactsComponent implements OnInit {
   }
 
   deleteContact(index: string){
+    console.log(index);
     this.contactService.deleteContact(index)
+
       .then(
         contacts => this.contacts = contacts,
         error => this.errorMessage = <any>error);

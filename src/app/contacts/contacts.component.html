@@ -5,8 +5,8 @@
   [ngClass]="{ odd: odd, even: even }">
 
   <li>{{item.firstname}} {{item.lastname}}  : {{item.phone}}
-    <button class="deletebutton" (click)="deleteContact()"><i class="fa fa-trash"></i></button>
-    <button class="editbutton" (click)="editContact()"><i class="fa fa-edit"></i></button>
+    <button class="deletebutton" (click)="deleteContact(item.id)"><i class="fa fa-trash"></i></button>
+    <button class="editbutton" (click)="editContact(item.id)"><i class="fa fa-edit"></i></button>
   </li>
 </ul>
 </div>

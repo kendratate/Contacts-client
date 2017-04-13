@@ -52,7 +52,7 @@ export class ContactService {
   }
 
   deleteContact(indexVal: string){
-    return this.http.delete(this.contactsUrl + "indexVal")
+    return this.http.delete(this.contactsUrl + indexVal)
       .toPromise()
       .then(this.extractData)
       .catch(this.handleError);
@@ -61,7 +61,6 @@ export class ContactService {
   editContact(indexVal: string){
 
   }
-
 
 
   private handleError (error: Response | any) {
