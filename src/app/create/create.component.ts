@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import { ContactService } from "../../contact.service";
 import { contact } from '../Contact';
 
+import { SharedService } from '../../shared.service';
+
+import 'rxjs/add/operator/toPromise';
 
 @Component({
   selector: 'app-create',
@@ -12,13 +15,15 @@ import { contact } from '../Contact';
 
 
 export class CreateComponent implements OnInit {
-  contacts: contact[];
   indexCount = 99;
-  constructor(private contactService: ContactService) { }
+  contacts: contact[];
+  errorMessage: string;
+  constructor(private contactService: ContactService, private _sharedService: SharedService) {}
 
   ngOnInit() {
 
   }
+
 
   createContact(firstName: string, lastName: string, phoneNum: string) {
     //take out index when connected to a database
@@ -26,10 +31,14 @@ export class CreateComponent implements OnInit {
     this.indexCount++;
     this.contactService.create(String(this.indexCount), firstName, lastName, phoneNum)
       .then(
-        //contacts => console.log(contacts);
-        //contacts => this.contactComponent.getContacts()
-        contacts => this.contacts = contacts
-        );
+        contacts => this.contacts = contacts,
+        error => this.errorMessage = <any>error);
+    this._sharedService.publishData(this.contacts);
+
+  }
+
+  onSubmit(): void{
+    this._sharedService.publishData(this.contacts);
   }
 
 }

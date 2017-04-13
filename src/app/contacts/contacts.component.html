@@ -1,10 +1,17 @@
 <div class="list">
-  <span><button onclick="">&#9650;</button> <button>&#9660;</button></span>
+  <span><button (click)="sortAscending();">&#9650;</button> <button (click)="sortDescending();">&#9660;</button></span>
 <ul *ngFor="let item of contacts; let even = even, let odd = odd; let i = index"
   [ngClass]="{ odd: odd, even: even }">
 
   <li>{{item.firstname}} {{item.lastname}}  : {{item.phone}}</li>
 </ul>
+</div>
+
+<div class="formBox" (ngSubmit)="onSubmit()">
+  <label class="formLabel">First Name: <input #newFirstName type="text" /></label>
+  <label class="formLabel">Last Name: <input #newLastName type="text" /></label>
+  <label class="formLabel">Phone #: <input #newPhoneNum type="text" /></label>
+  <button class="formButton" type="submit" (click)="createContact(newFirstName.value, newLastName.value, newPhoneNum.value); newFirstName.value=''; newLastName.value=''; newPhoneNum.value='';">Add Contact</button>
 </div>
 
 

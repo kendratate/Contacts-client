@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { CreateComponent } from './create/create.component';
 import { ContactService } from "../contact.service";
+import { SharedService } from "../shared.service";
 
 
 @NgModule({
@@ -21,7 +22,7 @@ import { ContactService } from "../contact.service";
     HttpModule,
     JsonpModule
   ],
-  providers: [ContactService],
+  providers: [ContactService, SharedService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
