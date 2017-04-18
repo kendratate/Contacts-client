@@ -1,6 +1,7 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { ContactService } from "../../contact.service";
 import { contact } from '../Contact';
+
 
 @Component({
   selector: 'app-contacts',
@@ -14,9 +15,7 @@ export class ContactsComponent implements OnInit {
   errorMessage: string;
   contacts: contact[];
 
-  constructor(private contactService: ContactService) {
-
-  }
+  constructor(private contactService: ContactService) {}
 
   ngOnInit() {
     this.getContacts();
@@ -58,8 +57,16 @@ export class ContactsComponent implements OnInit {
         error => this.errorMessage = <any>error);
   }
 
-  editContact(index:string){
+  editContact(index: string) {
+    console.log(index);
+    document.getElementById(index).classList.add("show");
+  }
 
+  editSendContact(indexVal: string, firstName: string, lastName: string, phoneNum: string){
+    this.contactService.editContact(String(indexVal), firstName, lastName, phoneNum)
+      .then(
+        contacts => this.contacts = contacts,
+        error => this.errorMessage = <any>error);
   }
 
   deleteContact(index: string){
@@ -71,6 +78,12 @@ export class ContactsComponent implements OnInit {
         error => this.errorMessage = <any>error);
   }
 
+  searchContacts(searchterm: string) {
+    this.contactService.searchContacts(searchterm)
+      .then(
+        searchresults => this.contacts = searchresults,
+        error => this.errorMessage = <any>error);
+  }
 }
 
 

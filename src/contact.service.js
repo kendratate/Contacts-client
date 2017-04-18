@@ -44,12 +44,22 @@ var ContactService = (function () {
             .catch(this.handleError);
     };
     ContactService.prototype.deleteContact = function (indexVal) {
-        return this.http.delete(this.contactsUrl + "indexVal")
+        return this.http.delete(this.contactsUrl + indexVal)
             .toPromise()
             .then(this.extractData)
             .catch(this.handleError);
     };
-    ContactService.prototype.editContact = function (indexVal) {
+    ContactService.prototype.editContact = function (indexVal, firstName, lastName, phoneNum) {
+        return this.http.post(this.contactsUrl + indexVal, JSON.stringify({ id: indexVal, firstname: firstName, lastname: lastName, phone: phoneNum }), { headers: this.headers })
+            .toPromise()
+            .then(this.extractData)
+            .catch(this.handleError);
+    };
+    ContactService.prototype.searchContacts = function (searchterm) {
+        return this.http.get(this.contactsUrl + "search/" + searchterm)
+            .toPromise()
+            .then(this.extractData)
+            .catch(this.handleError);
     };
     ContactService.prototype.handleError = function (error) {
         // In a real world app, you might use a remote logging infrastructure

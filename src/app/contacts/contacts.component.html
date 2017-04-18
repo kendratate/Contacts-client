@@ -1,22 +1,25 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<div class="list">
-  <span><button (click)="sortAscending();">&#9650;</button> <button (click)="sortDescending();">&#9660;</button></span>
-<ul *ngFor="let item of contacts; let even = even, let odd = odd; let i = index"
-  [ngClass]="{ odd: odd, even: even }">
 
-  <li>{{item.firstname}} {{item.lastname}}  : {{item.phone}}
+<span><button (click)="sortAscending();">&#9650;</button> <button (click)="sortDescending();">&#9660;</button></span>
+<span><label class="searchbox">Search Term: <input type="text" #searchterm /><button class="formButton" (click)="searchContacts(searchterm.value);">Search</button> </label></span>
+<div class="list" *ngFor="let item of contacts; let even = even, let odd = odd; let i = index">
+
+  <div [ngClass]="{ odd: odd, even: even }" style="{display:list-item;}">{{item.firstname}} {{item.lastname}}  : {{item.phone}}
     <button class="deletebutton" (click)="deleteContact(item.id)"><i class="fa fa-trash"></i></button>
     <button class="editbutton" (click)="editContact(item.id)"><i class="fa fa-edit"></i></button>
-  </li>
-</ul>
+  </div>
+
+  <div id="{{item.id}}" class="hide editbox">
+    <label class="formLabel">First Name: <input #newFirstName type="text" value={{item.firstname}} /></label>
+    <label class="formLabel">Last Name: <input  #newLastName type="text" value={{item.lastname}} /></label>
+    <label class="formLabel">Phone #: <input #newPhoneNum type="text" value={{item.phone}} /></label>
+    <button class="formButton" type="submit" (click)="editSendContact(item.id, newFirstName.value, newLastName.value, newPhoneNum.value); newFirstName.value=''; newLastName.value=''; newPhoneNum.value='';">Edit Contact</button>
+  </div>
 </div>
 
 <div class="formBox">
-  <label class="formLabel">First Name: <input #newFirstName type="text" /></label>
-  <label class="formLabel">Last Name: <input #newLastName type="text" /></label>
-  <label class="formLabel">Phone #: <input #newPhoneNum type="text" /></label>
-  <button class="formButton" type="submit" (click)="createContact(newFirstName.value, newLastName.value, newPhoneNum.value); newFirstName.value=''; newLastName.value=''; newPhoneNum.value='';">Add Contact</button>
+ <label class="formLabel">First Name: <input #newFirstName type="text" /></label>
+ <label class="formLabel">Last Name: <input #newLastName type="text" /></label>
+ <label class="formLabel">Phone #: <input #newPhoneNum type="text" /></label>
+ <button class="formButton" type="submit" (click)="createContact(newFirstName.value, newLastName.value, newPhoneNum.value); newFirstName.value=''; newLastName.value=''; newPhoneNum.value='';">Add</button>
 </div>
-
-
-

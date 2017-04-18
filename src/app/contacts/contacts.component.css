@@ -11,7 +11,7 @@
   width: 320px;
   padding: 10px;
   border: 5px solid gray;
-  margin: 0;
+  margin-top: 10px;
   position: absolute;
 }
 
@@ -27,4 +27,42 @@
 
 .formLabel{
   float: left;
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+.editbox {
+  /* modal container fixed across whole screen */
+  position: absolute;
+  border: 2px solid black;
+  width: 300px;
+  top: 30%;
+  background-color: darkgrey;
+  left: 20px;
+  right: 20%;
+  padding: 20px;
+  box-shadow: 2px 2px 4px 0px black;
+
+  /* z-index must be higher than .modal-background */
+  z-index: 1000;
+}
+
+input {
+  margin-bottom: 5px;
+}
+
+input[type=text]{
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 2px solid black;
+}
+
+.searchbox{
+  float:right;
 }

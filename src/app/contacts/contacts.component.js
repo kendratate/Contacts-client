@@ -42,11 +42,24 @@ var ContactsComponent = (function () {
             .then(function (contacts) { return _this.contacts = contacts; }, function (error) { return _this.errorMessage = error; });
     };
     ContactsComponent.prototype.editContact = function (index) {
+        console.log(index);
+        document.getElementById(index).classList.add("show");
+    };
+    ContactsComponent.prototype.editSendContact = function (indexVal, firstName, lastName, phoneNum) {
+        var _this = this;
+        this.contactService.editContact(String(indexVal), firstName, lastName, phoneNum)
+            .then(function (contacts) { return _this.contacts = contacts; }, function (error) { return _this.errorMessage = error; });
     };
     ContactsComponent.prototype.deleteContact = function (index) {
         var _this = this;
+        console.log(index);
         this.contactService.deleteContact(index)
             .then(function (contacts) { return _this.contacts = contacts; }, function (error) { return _this.errorMessage = error; });
+    };
+    ContactsComponent.prototype.searchContacts = function (searchterm) {
+        var _this = this;
+        this.contactService.searchContacts(searchterm)
+            .then(function (searchresults) { return _this.contacts = searchresults; }, function (error) { return _this.errorMessage = error; });
     };
     return ContactsComponent;
 }());
