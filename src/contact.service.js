@@ -13,7 +13,8 @@ require("rxjs/add/operator/toPromise");
 var ContactService = (function () {
     function ContactService(http) {
         this.http = http;
-        this.contactsUrl = 'http://localhost:8080/'; // URL to web API
+        // this.contactsUrl = 'http://localhost:8080/'; // URL to web API
+        this.contactsUrl = 'https://contact-server-mongo.herokuapp.com/'; // URL to web API
         this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
     }
     ContactService.prototype.getContacts = function () {
