@@ -4,13 +4,14 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "npm start",
+    "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "tslint \"src/**/*.ts\"",
     "e2e": "ng e2e",
     "preinstall": "npm install -g http-server",
-    "postinstall": "ng build"
+    "postinstall": "ng build --aot -prod",
+    "d": "git push heroku master"
   },
   "private": true,
   "dependencies": {
